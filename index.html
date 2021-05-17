@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Part 3</title>
+		<link rel="stylesheet" href="dist/styles.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	</head>
+	<body>
+		<header class="h-480 bg-header no-repeat bg-cover bg-center sm:h-750">
+          <div class="container relative mx-auto px-10% sm:px-3%">
+				<div class="mobile-header-bar absolute right-10% pt-10 z-10 sm:hidden">	
+					<a onclick="showMenu()" class="dt-mobile-menu-icon" aria-label="Mobile menu icon">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M3 7H21C21.6 7 22 6.6 22 6C22 5.4 21.6 5 21 5H3C2.4 5 2 5.4 2 6C2 6.6 2.4 7 3 7ZM22 12C22 12.6 21.6 13 21 13H3C2.4 13 2 12.6 2 12C2 11.4 2.4 11 3 11H21C21.6 11 22 11.4 22 12ZM3 17H21C21.6 17 22 17.4 22 18C22 18.6 21.6 19 21 19H3C2.4 19 2 18.6 2 18C2 17.4 2.4 17 3 17Z" fill="white"/>
+						</svg>	
+					</a>
+				</div>
+			</div>
+
+			<div id="lightbox" class="hidden z-20 fixed w-screen h-screen bg-black bg-opacity-30 sm:hidden" ></div>
+				<div id="mobile-menu" class="hidden fixed z-30 right-0 bg-white w-4/5 min-h-screen sm:hidden">
+					<div class="flex items-center justify-between h-45 p-10">
+						<div onclick="hideMenu()" class="text-blue hover:text-red">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path d="M18.7 17.3C19.1 17.7 19.1 18.3 18.7 18.7C18.5 18.9 18.3 19 18 19C17.7 19 17.5 18.9 17.3 18.7L12 13.4L6.7 18.7C6.5 18.9 6.3 19 6 19C5.7 19 5.5 18.9 5.3 18.7C4.9 18.3 4.9 17.7 5.3 17.3L10.6 12L5.3 6.7C4.9 6.3 4.9 5.7 5.3 5.3C5.7 4.9 6.3 4.9 6.7 5.3L12 10.6L17.3 5.3C17.7 4.9 18.3 4.9 18.7 5.3C19.1 5.7 19.1 6.3 18.7 6.7L13.4 12L18.7 17.3Z"/>
+							</svg>	
+						</div>
+						<div id="language" class="flex items-center">
+							<svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<rect width="28" height="18" fill="white"/>
+								<rect width="4" height="4" fill="#005E96"/>
+								<rect x="6" width="4" height="4" fill="#005E96"/>
+								<rect x="6" y="6" width="4" height="4" fill="#005E96"/>
+								<rect y="6" width="4" height="4" fill="#005E96"/>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M28 0H10V2H28" fill="#005E96"/>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M28 4V6H10V4H28Z" fill="#005E96"/>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M28 8H10V10H28V8Z" fill="#005E96"/>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M28 12V14H0V12H28Z" fill="#005E96"/>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M28 16V18H0V16H28Z" fill="#005E96"/>
+							</svg>
+							<a href="#" class="text-blue hover:text-red">
+								<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path d="M10.9083 5.65833L7.40829 9.15833C7.29163 9.275 7.17496 9.33333 6.99996 9.33333C6.82496 9.33333 6.70829 9.275 6.59163 9.15833L3.09163 5.65833C2.85829 5.425 2.85829 5.075 3.09163 4.84166C3.32496 4.60833 3.67496 4.60833 3.90829 4.84166L6.99996 7.93333L10.0916 4.84166C10.325 4.60833 10.675 4.60833 10.9083 4.84166C11.1416 5.075 11.1416 5.425 10.9083 5.65833Z"/>
+								</svg>
+							</a>
+						</div>
+					</div>
+					<div class="text-center">
+						<div id="login" class="mt-10 inline-block">
+							<div id="user" class="float-left text-blue">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M7 7C7 4.2 9.2 2 12 2C14.8 2 17 4.2 17 7C17 9.8 14.8 12 12 12C9.2 12 7 9.8 7 7ZM21 19V21C21 21.6 20.6 22 20 22C19.4 22 19 21.6 19 21V19C19 17.3 17.7 16 16 16H8C6.3 16 5 17.3 5 19V21C5 21.6 4.6 22 4 22C3.4 22 3 21.6 3 21V19C3 16.2 5.2 14 8 14H16C18.8 14 21 16.2 21 19ZM12 10C10.3 10 9 8.7 9 7C9 5.3 10.3 4 12 4C13.7 4 15 5.3 15 7C15 8.7 13.7 10 12 10Z"/>
+								</svg>	
+							</div>
+							<div id="login-links" class="inline-block text-14 font-bold"><a href="#" class="text-blue hover:text-red">Εγγραφή</a> / <a href="#" class="text-blue hover:text-red">Σύνδεση</a></div>
+						</div>
+					</div>
+					<div class="divider mt-20"></div>
+					<ul id="main-menu" class="ml-20 mr-10">
+						<li class="h-full"><a onclick="showSubMenu()" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>Η ΟΜΟΣΠΟΝΔΙΑ</span><i class="fas fa-angle-right"></i></a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>ΑΡΚΑΔΩΝ ΕΡΓΑ</span><i class="fas fa-angle-right"></i></a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>ΕΠΩΝΥΜΟΙ ΑΡΚΑΔΕΣ</span><i class="fas fa-angle-right"></i></a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>ΝΕΑ - ΕΝΗΜΕΡΩΣΗ</span><i class="fas fa-angle-right"></i></a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>ΕΠΙΣΚΕΨΗ ΣΤΗΝ ΑΡΚΑΔΙΑ</span><i class="fas fa-angle-right"></i></a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>ΑΝΑΖΗΤΗΣΕΙΣ ΣΤΗΝ ΑΡΚΑΔΙΑ</span><i class="fas fa-angle-right"></i></a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-14 h-full flex justify-between items-center mt-20"><span>ΕΠΙΚΟΙΝΩΝΙΑ</span><i class="fas fa-angle-right"></i></a></li>
+					</ul>
+				</div>
+			
+				<div id="mobile-submenu" class="hidden z-40 shadow-2xl fixed right-0 bg-white w-4/5 min-h-screen sm:hidden">
+					<a onclick="hideSubMenu()" class="text-blue hover:text-red text-14 h-full flex items-center p-10">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15.7 17.3C16.1 17.7 16.1 18.3 15.7 18.7C15.5 18.9 15.3 19 15 19C14.7 19 14.5 18.9 14.3 18.7L8.3 12.7C7.9 12.3 7.9 11.7 8.3 11.3L14.3 5.3C14.7 4.9 15.3 4.9 15.7 5.3C16.1 5.7 16.1 6.3 15.7 6.7L10.4 12L15.7 17.3Z"/>
+						</svg>	
+						<span>Επιστροφή</span>
+					</a>	
+					<ul class="mt-30 pl-30 pr-10">
+						<li><a href="#"  class="text-blue hover:text-red font-bold text-14">Ιστορία</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Διοικητικό Συμβούλιο</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Πρόεδρος - Βιογραφικό Σημείωμα</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Μήνυμα Προέδρου</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Districts</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Διατελεσαντες Προέδροι</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Αποστολή - Αξίες</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Πορεία - Εξέλιξη</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Έλληνας πρέσβης στην Ουάσιγκτον</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Πρέσβης ΗΠΑ στην Αθήνα</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Οικουμενικός Πατριάρχης</a></li>
+						<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Αρχιεπίσκοπος Αμερικής</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="container relative mx-auto max-w-680 px-10% sm:px-0% md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl lg:px-3%">
+				<div id="topbar" class="h-100 flex items-center text-white justify-between pl-0 sm:h-70 sm:pl-245">
+                    <div id="left-block" class="flex justify-between w-full sm:w-auto">
+                        <div id="time" class="text-right h-35 pt-10 mr-0 sm:pt-0 md:mr-20 lg:h-45">
+                            <h4 class="font-bold tracking-normal text-10 sm:tracking-2 sm:text-12">ΑΡΚΑΔΙΑ</h4>
+                            <div class="flex items-center justify-between">
+                                <div class="pre-icons mr-5 w-16 sm:w-20">
+                                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0.833336C4.91668 0.833336 0.833344 4.91667 0.833344 10C0.833344 15.0833 4.91668 19.1667 10 19.1667C15.0833 19.1667 19.1667 15.0833 19.1667 10C19.1667 4.91667 15.0833 0.833336 10 0.833336ZM10 17.5C5.83334 17.5 2.50001 14.1667 2.50001 10C2.50001 5.83334 5.83334 2.5 10 2.5C14.1667 2.5 17.5 5.83334 17.5 10C17.5 14.1667 14.1667 17.5 10 17.5ZM13.0833 13.0833C13.4167 12.75 13.4167 12.25 13.0833 11.9167L10.8333 9.66667V5C10.8333 4.5 10.5 4.16667 10 4.16667C9.50001 4.16667 9.16668 4.5 9.16668 5V10C9.16668 10.25 9.25001 10.4167 9.41668 10.5833L11.9167 13.0833C12.0833 13.25 12.25 13.3333 12.5 13.3333C12.75 13.3333 12.9167 13.25 13.0833 13.0833Z" fill="white"/></svg>
+                                </div>
+                                <p class="text-18 inline-block sm:text-26">13:28</p>
+                            </div>
+                        </div>
+                        <div id="weather" class="text-right w-75 h-35 pt-10 sm:h-45 sm:w-100 sm:pt-0">
+                            <h4 class="font-bold tracking-normal text-10 sm:tracking-2 sm:text-12">ΚΑΤΑΙΓΙΔΑ</h4>
+                            <div class="flex items-center justify-between">
+                                <div class="pre-icons mr-5 w-16 sm:w-20">
+                                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8485 14.8939H16.0145C18.6702 14.308 20.413 11.6294 19.9151 9.03448C19.4171 6.6907 17.3423 5.01658 15.0186 5.01658H14.5206C13.2757 1.41721 9.3751 -0.759157 5.64046 0.245319C3.73165 0.747556 2.07181 1.91944 1.0759 3.67728C-0.00299145 5.3514 -0.251967 7.44406 0.245985 9.3693C0.826929 11.3783 2.07181 13.0524 3.89763 14.0569C4.31259 14.308 4.81054 14.1406 5.05952 13.722C5.3085 13.3035 5.14251 12.8013 4.72755 12.6338C3.31669 11.7968 2.32078 10.5412 1.90582 8.95077C1.49086 7.36035 1.73984 5.85364 2.56976 4.43063C3.31669 3.09133 4.56157 2.17056 6.05542 1.75203C9.12613 0.914969 12.2798 2.84021 13.1097 5.93735C13.1927 6.35588 13.5247 6.607 13.9397 6.607H15.0186C16.5954 6.607 17.9233 7.69518 18.2552 9.2856C18.6702 11.0434 17.5083 12.885 15.6825 13.2198C15.1845 13.3035 14.9356 13.8057 15.0186 14.2243C15.1016 14.6428 15.4335 14.8939 15.8485 14.8939ZM9.12613 13.3035H12.5288C12.8608 13.3035 13.0268 13.5546 13.1927 13.8057C13.3587 14.0569 13.3587 14.3917 13.1927 14.6428L9.87306 19.6652C9.70708 19.8326 9.4581 20 9.20912 20C9.04314 20 8.87715 19.9163 8.71117 19.8326C8.29621 19.5815 8.21322 19.0792 8.46219 18.6607L10.952 14.9776H7.54928C7.21731 14.9776 6.96834 14.8102 6.88535 14.5591C6.71936 14.308 6.71936 13.9731 6.88535 13.722L10.205 8.69965C10.454 8.28112 10.952 8.19741 11.3669 8.44853C11.7819 8.69965 11.8649 9.20189 11.6159 9.62042L9.12613 13.3035Z" fill="white"/></svg>
+                                </div>
+                                <p class="text-18 inline-block sm:text-26">12°C<span class="text-white text-opacity-40">°F</span></p>
+                            </div>
+                        </div> 
+                    </div>
+                    <div id="right-block" class="hidden items-center justify-between sm:flex">
+                        <div id="login" class="mr-20 lg:mr-40">
+                            <div id="user" class="float-left">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 7C7 4.2 9.2 2 12 2C14.8 2 17 4.2 17 7C17 9.8 14.8 12 12 12C9.2 12 7 9.8 7 7ZM21 19V21C21 21.6 20.6 22 20 22C19.4 22 19 21.6 19 21V19C19 17.3 17.7 16 16 16H8C6.3 16 5 17.3 5 19V21C5 21.6 4.6 22 4 22C3.4 22 3 21.6 3 21V19C3 16.2 5.2 14 8 14H16C18.8 14 21 16.2 21 19ZM12 10C10.3 10 9 8.7 9 7C9 5.3 10.3 4 12 4C13.7 4 15 5.3 15 7C15 8.7 13.7 10 12 10Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 7C7 4.2 9.2 2 12 2C14.8 2 17 4.2 17 7C17 9.8 14.8 12 12 12C9.2 12 7 9.8 7 7ZM21 19V21C21 21.6 20.6 22 20 22C19.4 22 19 21.6 19 21V19C19 17.3 17.7 16 16 16H8C6.3 16 5 17.3 5 19V21C5 21.6 4.6 22 4 22C3.4 22 3 21.6 3 21V19C3 16.2 5.2 14 8 14H16C18.8 14 21 16.2 21 19ZM12 10C10.3 10 9 8.7 9 7C9 5.3 10.3 4 12 4C13.7 4 15 5.3 15 7C15 8.7 13.7 10 12 10Z" fill="white"/></svg>
+                            </div>
+                            <div id="login-links" class="inline-block text-14 font-bold"><a href="#">Εγγραφή</a> / <a href="#">Σύνδεση</a></div>
+                        </div>
+                        <div id="language" class="flex items-center mr-40">
+                            <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="18" fill="white"/>
+                                <rect width="4" height="4" fill="#005E96"/>
+                                <rect x="6" width="4" height="4" fill="#005E96"/>
+                                <rect x="6" y="6" width="4" height="4" fill="#005E96"/>
+                                <rect y="6" width="4" height="4" fill="#005E96"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M28 0H10V2H28" fill="#005E96"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M28 4V6H10V4H28Z" fill="#005E96"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M28 8H10V10H28V8Z" fill="#005E96"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M28 12V14H0V12H28Z" fill="#005E96"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M28 16V18H0V16H28Z" fill="#005E96"/>
+                            </svg>
+                            <a href="#"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9083 5.65833L7.40829 9.15833C7.29163 9.275 7.17496 9.33333 6.99996 9.33333C6.82496 9.33333 6.70829 9.275 6.59163 9.15833L3.09163 5.65833C2.85829 5.425 2.85829 5.075 3.09163 4.84166C3.32496 4.60833 3.67496 4.60833 3.90829 4.84166L6.99996 7.93333L10.0916 4.84166C10.325 4.60833 10.675 4.60833 10.9083 4.84166C11.1416 5.075 11.1416 5.425 10.9083 5.65833Z" fill="white"/>
+                            </svg>
+                            </a>
+                        </div>
+                    </div> 
+                </div> 
+			
+				<nav id="main" class="absolute top-10 left-1/2 transform -translate-x-2/4 sm:relative sm:bg-white sm:left-0 sm:transform sm:inset-auto sm:h-60 sm:bg-white sm:rounded-4">
+                    <a href="#" id="logo" class="block rounded-full border-0 left-0 sm:absolute sm:top-1/2 sm:transform sm:-translate-y-2/4 sm:left-50 sm:border-10 sm:border-red sm:bg-red">
+                        <img class="w-100 sm:w-180" src="images/logo.svg" alt="logo">
+                    </a>
+                    <ul id="main-menu" class="hidden sm:flex sm:items-center sm:justify-between sm:h-60 sm:pl-260 md:pr-20 lg:pl-300 lg:pr-40">
+						<li class="dropdown h-full">
+							<a href="#" class="text-blue hover:text-red font-bold h-full flex items-center text-13 md:text-13 lg:text-14">Η ΟΜΟΣΠΟΝΔΙΑ</a>
+							<div class="dropdown-content hidden absolute top-70 bg-white rounded-4 w-275 shadow-sm py-15 px-20 z-10">
+								<ul>
+									<li><a href="#"  class="text-blue hover:text-red font-bold text-14">Ιστορία</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Διοικητικό Συμβούλιο</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Πρόεδρος - Βιογραφικό Σημείωμα</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Μήνυμα Προέδρου</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Districts</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Διατελεσαντες Προέδροι</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Αποστολή - Αξίες</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Πορεία - Εξέλιξη</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Έλληνας πρέσβης στην Ουάσιγκτον</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Πρέσβης ΗΠΑ στην Αθήνα</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Οικουμενικός Πατριάρχης</a></li>
+									<li class="mt-10"><a href="#" class="text-blue hover:text-red font-bold text-14">Ο Αρχιεπίσκοπος Αμερικής</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-13 md:text-13 lg:text-14 h-full flex items-center">ΑΡΚΑΔΩΝ ΕΡΓΑ</a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-13 md:text-13 lg:text-14 h-full flex items-center">ΕΠΩΝΥΜΟΙ ΑΡΚΑΔΕΣ</a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-13 md:text-13 lg:text-14 h-full flex items-center">ΝΕΑ - ΕΝΗΜΕΡΩΣΗ</a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-13 md:text-13 lg:text-14 h-full flex items-center">ΕΠΙΣΚΕΨΗ ΣΤΗΝ ΑΡΚΑΔΙΑ</a></li>
+						<li class="h-full"><a href="#" class="text-blue hover:text-red font-bold text-13 md:text-13 lg:text-14 h-full flex items-center">ΑΝΑΖΗΤΗΣΕΙΣ ΣΤΗΝ ΑΡΚΑΔΙΑ</a></li>
+						<li class="h-full hidden md:block"><a href="#" class="text-blue hover:text-red font-bold text-24 h-full flex items-center"><i class="far fa-envelope"></i></a></li>
+					</ul>
+                </nav>
+
+				<div id="bottom-bar" class="mt-20 sm:mt-0 ">
+					<div class="items-left h-auto sm:h-70 pl-0 sm:pl-245 sm:flex sm:items-center">
+						<img class="mx-auto sm:mx-0" src="images/paf-logo.svg" alt="paf-logo">
+					</div>
+				</div>
+
+				<div class="bg-circle no-repeat bg-100% w-280 h-280 sm:w-450 sm:h-450 mt-30 mx-auto border-white shadow-md text-center text-white p-18 sm:p-40 sm:mt-0 rounded-full border-2 sm:border-6">
+					<svg class="mx-auto w-18 h-18 sm:w-24 sm:h-24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M13.2214 0.000107481V8.7293H19.5107V4.48616H17.4535V6.60773H15.2786V2.12168H21.9428V10.9392H2.05716V2.12168H8.7215V6.60773H6.54647V4.48616H4.4893V8.7293H10.7786V0.000107481H0V10.9392V13.0608V24H10.7786V15.2708H4.4893V19.5137H6.54647V17.3922H8.7215V21.8784H2.05716V13.0608H21.9428V21.8784H15.2786V17.3922H17.4535V19.5137H19.5107V15.2708H13.2214V24H24V0.000107481H13.2214Z" fill="white"/>
+					</svg>
+					<h3 class="text-12 font-bold mt-5 tracking-2 sm:mt-10">ΚΑΛΩΣ ΗΛΘΑΤΕ</h3>
+					<h2 class="text-18 font-bold mt-15 sm:text-24 sm:mt-30">Η αποστολή μας</h2>
+                    <p class="text-14 mt-10 sm:hidden">Ο Παναρκαδικής Ομοσπονδίας Αμερικής είναι μια πανεθνική μη κερδοσκοπικού αδελφό ελληνικό-αμερικανική οργάνωση …</p>
+					<p class="hidden text-16 mt-30 leading-25 sm:block">Ο Παναρκαδικής Ομοσπονδίας Αμερικής είναι μια πανεθνική μη κερδοσκοπικού αδελφό ελληνικό-αμερικανική οργάνωση τα μέλη της οποίας κατεβαίνουν από την περιοχή της Αρκαδίας στην Πελοπόννησο, στη νότια Ελλάδα …</p>
+					<a href="#" class="inline-flex items-center justify-center rounded-4 border-white border-1 text-14 font-bold text-white w-140 h-40 sm:w-200 mt-15 sm:mt-30 sm:h-50 hover:bg-red" >ΠΕΡΙΣΣΟΤΕΡΑ</a>
+				</div>
+
+			</div>
+        </header>
+
+		<section id="census" class="bg-none bg-no-repeat pt-0 mt-0 h-auto lg:h-745 sm:pt-10 sm:mt-10 sm:bg-stars">
+            <div class="container h-full mx-auto px-10%">
+                <img class="block mt-30 mx-auto" src="images/tree.png" alt="tree-image">
+                <h2 class="text-34 font-bold text-red text-center mt-30 leading-none sm:text-48 sm:mt-40 sm:leading-50">Μετριόμαστε, γιατί μετράμε!</h2>
+				<div id="twocols" class="grid grid-cols-1 mt-15 md:grid-cols-2 md:gap-30 sm:mt-40 lg:gap-60">
+                    <div id="text-left" class="text-black text-16 text-center leading-25 mx-auto md:text-left">
+						<h4 class="text-blue text-18 leading-20 font-bold sm:mb-20" >Γενική απογραφή  των αποδήμων Αρκάδων στις ΗΠΑ και επαναπατρισθέντων από τις ΗΠΑ</h4>
+						<p>Η Παναρκαδική Ομοσπονδία Αμερικής πραγματοποιεί απογραφή των Αρκάδων που διαμένουν και εργάζονται στις ΗΠΑ, (ανεξαρτήτως υπηκότητας).</p>
+						<p class="font-bold sm:mt-10 sm:mb-15" >Το αποτύπωμα της Αρκαδικής γης μας συνδέει!</p>
+						<p>Όση χιλιομετρική απόσταση και αν μας χωρίζει, όσες γενιές και να έχουμε...ψηλώσει πέρα απο τις ρίζες μας, η Αρκαδία, μας ενώνει!</p>
+					</div>
+                    <div id="text-right" class="hidden text-black text-16 text-center leading-25 mx-auto md:block sm:text-left">
+						<h4 class="text-blue text-18 leading-20 font-bold sm:mb-40">Απογραφόμαστε...</h4>
+						<ul class="pl-20 leading-30">
+							<li>Για να γνωρίσουμε ο ένας τον άλλο.</li>
+							<li>Για να αντλήσουμε δύναμη απο  τις ρίζες μας και την καταγωγή μας.</li>
+							<li>Για να είμαστε χρήσιμοι και να  παρεμβαίνουμε δημιουργικά για τις ΗΠΑ την Ελλάδα και την Αρκαδία.</li>
+							<li>Για να υλοποιήσουμε τα σχέδια και τα οραματά μας.</li>
+							<li>Για να είμαστε ισχυροί.</li>
+						</ul>
+					</div>
+                </div>
+                <h4 id="start" class="text-red text-18 text-center font-bold leading-20 mt-30">ΤΕΛΕΤΗ ΕΝΑΡΞΗΣ</h4>
+				<h3 id="date" class="text-blue text-24 text-center font-bold leading-20 mt-10 sm:mt-5 sm:text-34">Παρασκευή 20 Απριλίου 2021</h3>
+				<h4 id="ny" class="text-blue text-18 text-center font-bold mt-10 pb-40 leading-20">ΝΕΑ ΥΟΡΚΗ</h4>
+            </div>
+		</section>
+
+		<section id="works" class="bg-blue">
+			<div class="container mx-auto px-10% sm:px-3% lg:px-5%">
+                <div class="text-center pt-30 sm:pt-40">
+                    <svg class="w-24 h-24 inline-block" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2214 0.000107481V8.7293H19.5107V4.48616H17.4535V6.60773H15.2786V2.12168H21.9428V10.9392H2.05716V2.12168H8.7215V6.60773H6.54647V4.48616H4.4893V8.7293H10.7786V0.000107481H0V10.9392V13.0608V24H10.7786V15.2708H4.4893V19.5137H6.54647V17.3922H8.7215V21.8784H2.05716V13.0608H21.9428V21.8784H15.2786V17.3922H17.4535V19.5137H19.5107V15.2708H13.2214V24H24V0.000107481H13.2214Z" fill="white"/></svg>
+				    <h3 class="text-12 text-white font-bold mt-10 tracking-2">ΕΡΓΑ & ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ</h3>
+                </div>
+				<div class="flex justify-between mt-30">
+					<div class="max-w-300 mx-auto sm:mx-0 sm:px-10">
+						<img src="images/photo-1.jpg" alt="photo1">
+						<h2 class="text-white text-18 font-bold mt-20 leading-20 sm:leading-30 sm:text-24">Γενικού Παναρκαδικό Νοσοκομείο Τρίπολης</h2>
+						<p class="text-white text-16 leading-25 mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor.</p>
+						<div class="w-150 h-45 text-white rounded-4 text-14 font-bold inline-flex items-center justify-center mt-5 hover:bg-red"><a href="#"><img class="inline-block" src="images/line.svg" alt="line">ΠΕΡΙΣΣΟΤΕΡΑ</a></div>
+					</div>
+					<div class="max-w-300 hidden sm:block sm:px-10">
+						<img src="images/photo-2.jpg" alt="photo2">
+						<h2 class="text-white text-18 font-bold mt-20 leading-20 sm:leading-30 sm:text-24">Ο  παραδοσιακός οικισμός του Λεωνιδίου</h2>
+						<p class="text-white text-16 leading-25 mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor.</p>
+						<div class="w-150 h-45 text-white rounded-4 text-14 font-bold inline-flex items-center justify-center mt-5 hover:bg-red"><a href="#"><img class="inline-block" src="images/line.svg" alt="line">ΠΕΡΙΣΣΟΤΕΡΑ</a></div>
+					</div>
+					<div class="max-w-300 hidden md:block sm:px-10">
+						<img src="images/photo-3.jpg" alt="photo3">
+						<h2 class="text-white text-18 font-bold mt-20 leading-20 sm:leading-30 sm:text-24">Κυνουρία, Εκεί που δεσπόζει ο Πάρνωνας</h2>
+						<p class="text-white text-16 leading-25 mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor.</p>
+						<div class="w-150 h-45 text-white rounded-4 text-14 font-bold inline-flex items-center justify-center mt-5 hover:bg-red"><a href="#"><img class="inline-block" src="images/line.svg" alt="line">ΠΕΡΙΣΣΟΤΕΡΑ</a></div>
+					</div>
+					<div class="max-w-300 hidden lg:block sm:px-10">
+						<img src="images/photo-4.jpg" alt="photo4">
+						<h2 class="text-white text-18 font-bold mt-20 leading-20 sm:leading-30 sm:text-24">Οι ελληνικές πόλεις με τα καλύτερα πάρκα!</h2>
+						<p class="text-white text-16 leading-25 mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor.</p>
+						<div class="w-150 h-45 text-white rounded-4 text-14 font-bold inline-flex items-center justify-center mt-5 hover:bg-red"><a href="#"><img class="inline-block" src="images/line.svg" alt="line">ΠΕΡΙΣΣΟΤΕΡΑ</a></div>
+					</div>
+				</div>
+                <div class="button text-center ">
+                    <a class="sm:mb-40 mb-50 sm:mb-0 inline-flex items-center justify-center rounded-4 border-white border-1 text-14 font-bold text-white w-280 h-50 mt-10 sm:w-200 mt-16 sm:mt-30 sm:h-50 hover:bg-red" href="#">ΠΕΡΙΣΣΟΤΕΡΑ</a>
+                </div>
+            </div>
+        </section>
+
+		<section id="contact">
+			<div class="container mx-auto">
+				<div class="mx-auto relative mx-auto sm:max-w-420 md:max-w-720">
+					<div class="text-center">
+						<h5 class="text-blue text-14 font-14 font-bold mt-30 tracking-2 sm:mt-60 sm:text-12">ΕΠΙΚΟΙΝΩΝΙΑ</h5>
+					</div>
+					<div class="divider hidden mx-auto sm:block sm:mt-20 sm:max-w-420 md:max-w-720 "></div>
+					<form action="/action_page.php" class="mt-35 mx-auto max-w-300 sm:mt-15 md:max-w-600">
+						<label class="block mb-5 text-12 text-black" for="fullname">Ονοματεπώνυμο</label>
+						<input class="block w-full border border-gray-300 rounded-4 mb-15 leading-40" type="text" id="fullname" name="fullname">
+						<label class="block mb-5 text-12 text-black" for="phone">Τηλέφωνο</label>
+						<input class="block w-full border border-gray-300 rounded-4 mb-15 leading-40 pl-30 bg-phone" type="text" id="phone" name="phone">
+						<label class="block mb-5 text-12 text-black" for="email">Email</label>
+						<input class="block w-full border border-gray-300 rounded-4 mb-15 leading-40 pl-30 bg-email" type="text" id="email" name="email">
+						<label class="block mb-5 text-12 text-black" for="message">Μήνυμα</label>
+						<textarea class="block w-full border border-gray-300 rounded-4 mb-15 leading-40 resize-none" id="message" name="message" rows="3" ></textarea>	
+						<div class="divider absolute mx-auto w-full left-0 bottom-100 sm:bottom-140"></div>
+						<div class="text-right"><a class="w-130 h-50 font-bold text-14 text-white inline-flex items-center justify-center rounded-4 bg-blue mt-60 mb-20 sm:mb-60 sm:w-240 hover:bg-red" href="#">ΑΠΟΣΤΟΛΗ<img src="images/arrowRight.png" alt="btnicon"></a></div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<footer class="bg-blue text-center">
+			<div class="container relative mx-auto px-10% md:px-3% lg:px-10%">
+				<a href="#" class="back-to-top">
+					<div id="backTop" class="absolute top-85% sm:top-22 left-90%  bg-red rounded-full w-44 h-44 flex items-center justify-center">
+						<img class="transform -rotate-90" src="images/arrowRight.png" alt="btnicon">
+					</div>
+				</a>
+				<div id="logofooter" class="pt-30 pb-20 mx-auto">
+                    <img class="inline-block w-140 h-140 sm:w-180 sm:w-180" src="images/logo.svg" alt="logo">
+                </div>
+				<div id="paffooter" class="pb-30 mx-auto">
+                    <img class="inline-block" src="images/paf-logo.svg" alt="paf-logo">
+                </div>
+				<div class="social flex items-center justify-between mx-auto max-w-320">
+					<div class="facebook text-20 w-40 h-40 bg-white text-blue rounded-full flex items-center justify-center"><i class="fab fa-facebook-f"></i></div>
+					<div class="twitter text-18 w-40 h-40 bg-white text-blue rounded-full flex items-center justify-center"><i class="fab fa-twitter"></i></div>
+					<div class="linkedin text-18 w-40 h-40 bg-white text-blue rounded-full flex items-center justify-center"><i class="fab fa-linkedin-in"></i></div>
+					<div class="instagram text-20 w-40 h-40 bg-white text-blue rounded-full flex items-center justify-center"><i class="fab fa-instagram"></i></div>
+					<div class="youtube text-18 w-40 h-40 bg-white text-blue rounded-full flex items-center justify-center"><i class="fab fa-youtube"></i></div>
+				</div>
+				<nav id="bottom" class="mt-30">
+					<ul id="bottom-menu" class="block md:flex md:justify-between h-auto sm:h-30">
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">Η ΟΜΟΣΠΟΝΔΙΑ</a></li>
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">ΑΡΚΑΔΩΝ ΕΡΓΑ</a></li>
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">ΕΠΩΝΥΜΟΙ ΑΡΚΑΔΕΣ</a></li>
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">ΝΕΑ - ΕΝΗΜΕΡΩΣΗ</a></li>
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">ΕΠΙΣΚΕΨΗ ΣΤΗΝ ΑΡΚΑΔΙΑ</a></li>
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">ΑΝΑΖΗΤΗΣΕΙΣ ΣΤΗΝ ΑΡΚΑΔΙΑ</a></li>
+						<li class="mb-20 md:mb-0"><a class="text-14 text-white font-bold hover:text-red" href="#">ΕΠΙΚΟΙΝΩΝΙΑ</a></li>
+					</ul>
+				</nav>
+				<div id="copywrite" class="text-14 text-white-opacity pt-10 pb-25 sm:pb-10">©2018 Pan Arcadian Federation of America</div>
+			</div>
+		</footer>
+
+		<script src="js/custom.js"></script>
+	</body>
+</html>

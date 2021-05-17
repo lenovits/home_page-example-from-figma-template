@@ -1,0 +1,60 @@
+@font-face{
+	font-family: SourceSansPro;
+	src: url(../fonts/SourceSansPro-Regular.ttf);
+	font-weight: normal;
+}
+@font-face{
+	font-family: SourceSansPro;
+	src: url(../fonts/SourceSansPro-Bold.ttf);
+	font-weight: bold;
+}
+@font-face{
+	font-family: ProximaNova;
+	src: url(../fonts/ProximaNova-Regular.otf);
+	font-weight: normal;
+}
+@font-face{
+	font-family: ProximaNova;
+	src: url(../fonts/ProximaNova-Bold.otf);
+	font-weight: bold;
+}
+*{ 
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: SourceSansPro, serif;
+}
+
+/************** top-bar ***************/
+#topbar div p{
+	font-family: ProximaNova, serif;
+}
+
+/************** main-menu ***************/
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/************** census ***************/
+#census{
+	background-position: bottom center;
+}
+
+#text-right ul{
+	list-style-image: url('../images/arrow-right.svg');
+}
+
+/************** contact ***************/
+.divider:after {
+    background: #EEEEEE none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 1px;
+}
+
+#phone{
+	background: url('../images/phone.png') no-repeat scroll 10px center;
+}
+#email{
+	background: url('../images/mail.png') no-repeat scroll 10px center;
+}

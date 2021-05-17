@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* npx tailwindcss-cli@latest build ./css/styles.css -o ./dist/styles.css */
